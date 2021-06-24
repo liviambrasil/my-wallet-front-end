@@ -4,21 +4,36 @@ import styled from "styled-components"
 import { AiOutlinePlusCircle, AiOutlineMinusCircle } from "react-icons/ai"
 import { icons } from "react-icons"
 import { useHistory } from "react-router"
+import UserContext from "../context/UserContext"
+import { useContext, useEffect, useState } from "react"
 
 export default function Home () {
+    const [registries, setRegistries] = useState()
+    const {user, setUser} = useContext(UserContext)
 
-    const user = "Fulana"
-    const entries = false
-    const exits = false
+    const UserStorage = localStorage.getItem("user")
+
+    useEffect(() => {
+        if (UserStorage) {
+            setUser(JSON.parse(UserStorage))
+        }
+    }, [])
+
+    /*useEffect(() => {
+        const config = {headers: {"Authorization": `Bearer ${user.token}`}}
+        const promise = axios.get('http://localhost:4000/registries', config)
+        promise.then(response => setRegistries(response.data))
+    }
+    , [])*/
 
     const history = useHistory()
 
     return (
         <Container>
-            <Header title = {`Olá, ${user}`} buttonExit = {true} />
+            <Header title = {`Olá, ${user.username}`} buttonExit = {true} />
             <Records>
-                {entries && exits
-                    ? <div>entries and exits</div>
+                {registries
+                    ? <List>{registries}</List>
                     : <p>Não há registros de entrada ou saída</p>
                 }
             </Records>
@@ -32,19 +47,19 @@ export default function Home () {
             </Buttons>
         </Container>
     )
+
 }
 
 const Container = styled.div`
-    height: 100vh;
+    height: 90vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 `
-
 const Records = styled.div`
     width: 100%;
-    height: 70vh;
+    height: 80vh;
     border-radius: 5px;
     background: #fff;
     color: #868686;
@@ -58,15 +73,18 @@ const Records = styled.div`
         font-size: 20px;
     }
 `
+const List = styled.div`
+    color: #666;
+
+`
 const Buttons = styled.div`
     width: 100%;
-    height: 17vh;
     display: flex;
     justify-content: space-between;
 `
 const Button = styled.button`
     width: 48%;
-    height: 100%;
+    height: 20vh;
     background: #A328D6;
     border-radius: 5px;
     position: relative;

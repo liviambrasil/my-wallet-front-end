@@ -1,5 +1,5 @@
 import axios from "axios"
-import { useContext, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import Input from "../components/Input"
 import Button from "../components/Button"
 import Logo from "../styles/Logo"
@@ -15,6 +15,15 @@ export default function Login () {
     const [boolean, setBoolean] = useState(false)
     const history = useHistory()
 
+    const UserStorage = localStorage.getItem("user");
+
+    useEffect(() => {
+        if (UserStorage) {
+            setUser(JSON.parse(UserStorage))
+            history.push("/home")
+        }
+    }, [])
+
     return (
         <Container>
             <Logo />
@@ -26,27 +35,34 @@ export default function Login () {
                     type="password"
                     onChange={(event) => setPassword(event.target.value)} 
                     disabled={boolean}/>
-            <Button text="Entrar" onClick={() => sendRequest (email, password, setUser, setBoolean)} />
+            <Button text="Entrar" onClick={() => sendRequest (email, setEmail, password, setPassword, setUser, setBoolean, history)} />
             <p onClick={() => history.push("/sign-up")}>Primeira vez? Cadastre-se!</p>
         </Container>
     )
 }
 
-function sendRequest (email, password, setUser, setBoolean) {
+function sendRequest (email,setEmail, password, setPassword, setUser, setBoolean, history) {
     setBoolean(true)
     const body = {email, password}
 
     const promise = axios.post('http://localhost:4000/login', body)
-    promise.then(response => {
-        setUser(response)
+    promise.then(response => { //response.data = {username, token}
         setBoolean(false)
-        alert('sucesso no login!')
+        setUser(response.data)
+        history.push('/home')
+        localStorage.setItem("user", JSON.stringify(response.data))
     })
+    promise.catch(error => {
+        if(error.message === "Request failed with status code 401")
+        alert("Falha no login. Tente novamente.")
+        setBoolean(false)
+        setEmail('')
+        setPassword('')})
 }
 
 const Container = styled.div`
     width: 100%;
-    height: 100vmax;
+    height: 90vh;
     display: flex;
     flex-direction: column;
     justify-content: center;

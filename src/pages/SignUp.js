@@ -53,11 +53,10 @@ function sendRequest (name, email, password, setBoolean, history) {
         const promise = axios.post('http://localhost:4000/signup', body)
         promise.then(() => {
             setBoolean(false)
-            alert('sucesso no login!')
-            history.push("/login")
+            alert('sucesso no cadastro!')
+            history.push("/")
             }
         )
-        promise.catch(() => alert("Erro no cadastro"))
     }
     else {
         alert("Preencha todos os campos")
@@ -67,7 +66,7 @@ function sendRequest (name, email, password, setBoolean, history) {
 
 const Container = styled.div`
     width: 100%;
-    height: 100vmax;
+    height: 90vh;
     display: flex;
     flex-direction: column;
     justify-content: center;

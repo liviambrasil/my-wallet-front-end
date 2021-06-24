@@ -1,5 +1,4 @@
-import { BrowserRouter, Switch, Route } from "react-router-dom";
-
+import { BrowserRouter, Switch, Route, useHistory, useLocation } from "react-router-dom";
 import Login from "./pages/Login"
 import SignUp from "./pages/SignUp"
 import Home from "./pages/Home"
@@ -13,12 +12,13 @@ function App() {
 
   const [user, setUser] = useState()
 
+
   return (
     <UserContext.Provider value={ {user, setUser} }>
       <BrowserRouter>
         <GlobalStyle />
         <Switch>
-          <Route path="/login">
+          <Route path="/" exact>
             <Login />
           </Route>
           <Route path="/sign-up">

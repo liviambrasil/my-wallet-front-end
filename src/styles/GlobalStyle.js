@@ -36,7 +36,9 @@ const GlobalStyle = createGlobalStyle`
         font-family: 'Raleway', sans-serif;
         background: #8c11be;
         padding: 25px 25px 15px 25px;
+        height: auto;
     }
+
     ol, ul {
         list-style: none;
     }
