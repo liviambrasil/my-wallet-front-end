@@ -1,30 +1,23 @@
 import axios from "axios"
 import Header from "../components/Header"
 import styled from "styled-components"
-import { AiOutlinePlusCircle, AiOutlineMinusCircle } from "react-icons/ai"
-import { icons } from "react-icons"
 import { useHistory } from "react-router"
 import UserContext from "../context/UserContext"
 import { useContext, useEffect, useState } from "react"
+import List from "../components/List"
+import * as dayjs from 'dayjs'
 
 export default function Home () {
     const [registries, setRegistries] = useState()
     const {user, setUser} = useContext(UserContext)
 
-    const UserStorage = localStorage.getItem("user")
-
     useEffect(() => {
-        if (UserStorage) {
-            setUser(JSON.parse(UserStorage))
-        }
-    }, [])
-
-    /*useEffect(() => {
         const config = {headers: {"Authorization": `Bearer ${user.token}`}}
         const promise = axios.get('http://localhost:4000/registries', config)
-        promise.then(response => setRegistries(response.data))
+        promise.then(response => {
+            setRegistries(response.data)})
     }
-    , [])*/
+    , [])
 
     const history = useHistory()
 
@@ -33,8 +26,8 @@ export default function Home () {
             <Header title = {`Olá, ${user.username}`} buttonExit = {true} />
             <Records>
                 {registries
-                    ? <List>{registries}</List>
-                    : <p>Não há registros de entrada ou saída</p>
+                    ? <List registries={registries} />
+                    : <h2>Não há registros de entrada ou saída</h2>
                 }
             </Records>
             <Buttons>
@@ -47,7 +40,6 @@ export default function Home () {
             </Buttons>
         </Container>
     )
-
 }
 
 const Container = styled.div`
@@ -63,19 +55,14 @@ const Records = styled.div`
     border-radius: 5px;
     background: #fff;
     color: #868686;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     margin: 13px;
     text-align: center;
-    p{
+
+    h2{
         width: 60%;
         font-size: 20px;
+        text-align: center;
     }
-`
-const List = styled.div`
-    color: #666;
-
 `
 const Buttons = styled.div`
     width: 100%;

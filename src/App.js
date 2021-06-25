@@ -1,22 +1,22 @@
-import { BrowserRouter, Switch, Route, useHistory, useLocation } from "react-router-dom";
+import { BrowserRouter, Switch, Route, useHistory } from "react-router-dom";
 import Login from "./pages/Login"
 import SignUp from "./pages/SignUp"
 import Home from "./pages/Home"
-import Entry from "./pages/Entry";
-import Exit from "./pages/Exit"
+import Registry from "./pages/Registry";
 import GlobalStyle from "./styles/GlobalStyle";
 import UserContext from "./context/UserContext";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
 
 function App() {
 
-  const [user, setUser] = useState()
-
+  const [user,setUser] = useState(JSON.parse(localStorage.getItem('user')))
 
   return (
-    <UserContext.Provider value={ {user, setUser} }>
+
       <BrowserRouter>
         <GlobalStyle />
+        <UserContext.Provider value={ {user, setUser} }>
         <Switch>
           <Route path="/" exact>
             <Login />
@@ -28,15 +28,17 @@ function App() {
             <Home />
           </Route>
           <Route path="/entry">
-            <Entry />
+            <Registry />
           </Route>
           <Route path="/exit">
-            <Exit />
+            <Registry />
           </Route>
         </Switch>
+        </UserContext.Provider>
       </BrowserRouter>
-    </UserContext.Provider>
+    
   );
 }
+
 
 export default App;

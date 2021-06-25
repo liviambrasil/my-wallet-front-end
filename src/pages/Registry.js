@@ -5,18 +5,19 @@ import Header from "../components/Header"
 import Input from "../components/Input"
 import Button from "../components/Button"
 import UserContext from "../context/UserContext"
-import { useHistory } from "react-router"
+import { useHistory, useLocation } from "react-router"
+import newRegister from "../requests/newRegister"
 
-export default function Entry () {
+export default function Registry () {
 
     const [value, setValue] = useState()
     const [description, setDescription] = useState()
-    const [type, setType] = useState()
     const [boolean, setBoolean] = useState(false)
 
-    const {user, setUser} = useContext(UserContext);
-    const config = {headers: {"Authorization": `Bearer ${user.token}`}}
+    const {user} = useContext(UserContext);
     const history = useHistory()
+    const location = useLocation()
+    const type = location.pathname
 
     return (
         <>
@@ -32,25 +33,9 @@ export default function Entry () {
                         onChange={(event) => setDescription(event.target.value)}  
                         disabled={boolean}/>
             </Inputs>
-            <Button text="Salvar entrada" onClick={() => sendRequest (value, description, setBoolean, user, history)} />
+            <Button onClick={() => newRegister({value, description, setBoolean, history, type, user})} />
         </>
     )
-}
-
-async function sendRequest (value, description, setBoolean, user, history) {
-    const type = "entry"
-    const body = {value, description, type}
-
-    const config = {headers: {"Authorization": `Bearer ${user.token}`}}
-
-    setBoolean(true)
-    
-        const promise = axios.post('http://localhost:4000/registries', body, config)
-        promise.then(() => {
-            alert("sucesso no registro!")
-            setBoolean(false)
-            history.push('/home')
-        })
 }
 
 

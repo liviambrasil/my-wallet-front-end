@@ -15,13 +15,12 @@ export default function Login () {
     const [boolean, setBoolean] = useState(false)
     const history = useHistory()
 
-    const UserStorage = localStorage.getItem("user");
+    const user = localStorage.getItem('user')
+
 
     useEffect(() => {
-        if (UserStorage) {
-            setUser(JSON.parse(UserStorage))
-            history.push("/home")
-        }
+        user ? history.push('/home') : setUser(null)
+
     }, [])
 
     return (
