@@ -7,14 +7,22 @@ export default function newRegister (props) {
 
     const {value, description, setBoolean, history, type, user} = props
     const config = {headers: {"Authorization": `Bearer ${user.token}`}}
+    console.log(type)
 
-    const body = {value: value*100, description, type}
+    if(value && description) {
+        const body = {value, description, type}
 
-    setBoolean(true)
+
+        setBoolean(true)
         const promise = axios.post('http://localhost:4000/registries', body, config)
         promise.then(() => {
             alert("sucesso no registro!")
             setBoolean(false)
             history.push('/home')
         })
+    }
+    else{
+        alert('Preencha todos os campos')
+        setBoolean(false)
+    }
 }

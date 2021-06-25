@@ -16,12 +16,13 @@ export default function Registry () {
 
     const {user} = useContext(UserContext);
     const history = useHistory()
+
     const location = useLocation()
     const type = location.pathname
 
     return (
         <>
-            <Header title={"Nova entrada"} buttonExit={false}/>
+            <Header title={type === "/entry" ? "Nova entrada" : "Nova saída"} buttonExit={false}/>
             <Inputs>
                 <Input  placeholder="Valor" 
                         type="text"

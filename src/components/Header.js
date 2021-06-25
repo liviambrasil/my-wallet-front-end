@@ -1,16 +1,33 @@
 import styled from "styled-components"
-import { AiOutlineExport } from "react-icons/ai"
+import { AiOutlineExport, AiOutlineLogout } from "react-icons/ai"
+import axios from "axios"
+import { useContext } from "react"
+import UserContext from "../context/UserContext"
+import { useHistory } from "react-router"
 
 export default function Header ({title, buttonExit}) {
+
+    const {user} = useContext(UserContext)
+    const history = useHistory()
+
     return (
         <Top>
             <h1>{title}</h1>
             {buttonExit
-            ? <Image src="/assets/logout.png" />
+            ? <Image onClick={() => signOut(user, history)} src="/assets/logout.png" />
             : <> </>
             }
         </Top>
     )
+}
+
+function signOut (user, history) {
+    const config = {headers: {"Authorization": `Bearer ${user.token}`}}
+    const promise = axios.post('http://localhost:4000/signout', {}, config)
+    promise.then(() => {
+        localStorage.clear()
+        history.push("/")
+    })
 }
 
 const Image = styled.img`

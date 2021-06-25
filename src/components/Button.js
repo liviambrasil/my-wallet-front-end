@@ -8,7 +8,7 @@ export default function Button (props) {
     const type = location.pathname
     let text;
 
-    type === 'entry'
+    type === '/entry'
     ? text = 'Salvar entrada'
     : text = 'Salvar saída'
     

@@ -6,7 +6,6 @@ export default function List ({registries}) {
     return (
         <ListItens>
             {registries.map((element) => {
-                console.log(element.description)
                 const date = dayjs(element.date).format('DD/MM')
                 return (
                         <Item>
@@ -14,7 +13,7 @@ export default function List ({registries}) {
                                 <Date>{date}</Date>
                                 <Description>{element.description}</Description>
                             </div>
-                            <Value type={element.type}>{element.value.toFixed(2)}</Value>
+                            <Value type={element.type}>{element.value}</Value>
                         </Item>
                 )
             })}
@@ -23,9 +22,11 @@ export default function List ({registries}) {
 }
 
 const ListItens = styled.div`
+    height: auto;
+    max-height: 50vh;
     margin: 23px 12px;
+    overflow-x: auto;
 `
-
 const Item = styled.div`
     display: flex;
     justify-content: space-between;
@@ -49,5 +50,5 @@ const Description = styled.p`
     margin-left: 5px;
 `
 const Value = styled.p`
-    color: ${props => props.type==='entry' ? "#03AC00" : "#C70000"};
+    color: ${props => props.type==='/entry' ? "#03AC00" : "#C70000"};
 `
