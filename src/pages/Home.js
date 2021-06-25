@@ -5,7 +5,7 @@ import { useHistory } from "react-router"
 import UserContext from "../context/UserContext"
 import { useContext, useEffect, useState } from "react"
 import List from "../components/List"
-import * as dayjs from 'dayjs'
+import { HiOutlineMinusCircle,HiOutlinePlusCircle } from "react-icons/hi";
 
 export default function Home () {
     const [registries, setRegistries] = useState()
@@ -32,9 +32,11 @@ export default function Home () {
             </Records>
             <Buttons>
                 <Button onClick={() => history.push("./entry")}>
+                    <OutlinePlus/>
                     <p>Nova entrada</p>
                 </Button>
                 <Button onClick={() => history.push("./exit")}>
+                    <OutlineMinus/>
                     <p>Nova saída</p>
                 </Button>
             </Buttons>
@@ -87,4 +89,20 @@ const Button = styled.button`
         bottom: 10px;
         left: 10px;
     }
+`
+const OutlinePlus = styled(HiOutlinePlusCircle)`
+    position: absolute;
+    top:10px;
+    left: 10px;
+    color: #fff;
+    width: 24px;
+    height: 24px;
+`
+const OutlineMinus = styled(HiOutlineMinusCircle)`
+    position: absolute;
+    top:10px;
+    left: 10px;
+    color: #fff;
+    width: 24px;
+    height: 24px;
 `
