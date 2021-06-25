@@ -36,7 +36,7 @@ export default function SignUp () {
                     onChange={(event) => setConfirmPassword(event.target.value)} 
                     disabled={boolean}/>
 
-            <Button text="Entrar" onClick={() => {
+            <Button text="Cadastrar" onClick={() => {
                 confirmPassword === password
                 ? sendRequest (name, email, password, setBoolean, history)
                 : alert("Senha incompatível")

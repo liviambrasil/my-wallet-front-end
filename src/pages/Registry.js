@@ -19,6 +19,7 @@ export default function Registry () {
 
     const location = useLocation()
     const type = location.pathname
+    const text = type === '/entry' ? 'Salvar entrada' : 'Salvar saída'
 
     return (
         <>
@@ -34,7 +35,8 @@ export default function Registry () {
                         onChange={(event) => setDescription(event.target.value)}  
                         disabled={boolean}/>
             </Inputs>
-            <Button onClick={() => newRegister({value, description, setBoolean, history, type, user})} />
+            <Button text={text} 
+                        onClick={() => newRegister({value, description, setBoolean, history, type, user})} />
         </>
     )
 }

@@ -1,16 +1,10 @@
-import { useLocation } from "react-router"
+
 import styled from "styled-components"
 
 export default function Button (props) {
 
-    const {onClick} = props
-    const location = useLocation()
-    const type = location.pathname
-    let text;
+    const {onClick, text} = props
 
-    type === '/entry'
-    ? text = 'Salvar entrada'
-    : text = 'Salvar saída'
     
     return (
         <Item onClick={onClick}>{text}</Item>
