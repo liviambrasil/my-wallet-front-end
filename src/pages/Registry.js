@@ -1,4 +1,3 @@
-import axios from "axios"
 import { useContext, useState } from "react"
 import styled from "styled-components"
 import Header from "../components/Header"
@@ -25,18 +24,20 @@ export default function Registry () {
         <>
             <Header title={type === "/entry" ? "Nova entrada" : "Nova saída"} buttonExit={false}/>
             <Inputs>
-                <Input  placeholder="Valor" 
+                <Input onChange={(event) => setValue(event.target.value)}
+                        placeholder='Valor'
                         type="text"
-                        onChange={(event) => setValue(event.target.value)}  
-                        disabled={boolean}/>
+                        className='input-mask'
+                        required 
+                        />
 
                 <Input  placeholder="Descrição" 
                         type="text"
                         onChange={(event) => setDescription(event.target.value)}  
-                        disabled={boolean}/>
+                        disabled={boolean} />
             </Inputs>
             <Button text={text} 
-                        onClick={() => newRegister({value, description, setBoolean, history, type, user})} />
+                    onClick={() => newRegister({value, description, setBoolean, history, type, user})} />
         </>
     )
 }

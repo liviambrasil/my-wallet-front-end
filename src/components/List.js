@@ -12,27 +12,28 @@ export default function List ({registries}) {
             return element.type === '/entry' ? element.value : -(element.value)
         })
 
-        registriesValues.map((element) => +(total += element))
-        return total
+        registriesValues.map((element) => parseInt(total += element))
+        return total = (total/100).toFixed(2)
     }
 
     return (
         <ListItens>
             {registries.map((element) => {
                 const date = dayjs(element.date).format('DD/MM')
+                const value = (element.value/100).toFixed(2)
                 return (
                         <Item>
                             <div>
                                 <Date>{date}</Date>
                                 <Description>{element.description}</Description>
                             </div>
-                            <Value type={element.type}>{element.value}</Value>
+                            <Value type={element.type}>{value}</Value>
                         </Item>
                 )
             })}
             <Total>
                 <p>SALDO</p>
-                <TotalCalc total={total}>{totalCalc(registries)}</TotalCalc>
+                <TotalCalc total={totalCalc(registries)}>{totalCalc(registries)}</TotalCalc>
             </Total>
         </ListItens>
     )
@@ -84,5 +85,5 @@ const Total = styled.div`
 const TotalCalc = styled.p `
     font-size: 16px;
     font-weight: 400;
-    color: ${props => props.total >= 0 ? "#03AC00" : "#C70000"}
+    color: ${props => (props.total>0) ? "#03AC00" : "#C70000"};
 `

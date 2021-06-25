@@ -1,11 +1,12 @@
 import styled from "styled-components";
 
+
 export default function Input (props) {
 
-    const { placeholder, type, onChange, disabled, step, name, min } = props
+    const { placeholder, type, onChange, disabled } = props
 
     return (
-        <Item   type={type} step={step} name={name} min={min}
+        <Item   type={type}
                 placeholder={placeholder} 
                 onChange={onChange}
                 disabled={disabled}/>

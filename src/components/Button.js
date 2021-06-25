@@ -1,11 +1,10 @@
-
 import styled from "styled-components"
 
 export default function Button (props) {
 
     const {onClick, text} = props
 
-    
+
     return (
         <Item onClick={onClick}>{text}</Item>
     )
