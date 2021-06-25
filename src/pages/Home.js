@@ -57,6 +57,7 @@ const Records = styled.div`
     color: #868686;
     margin: 13px;
     text-align: center;
+    position: relative;
 
     h2{
         width: 60%;
