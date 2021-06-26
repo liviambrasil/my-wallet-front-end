@@ -38,15 +38,16 @@ export default function SignUp () {
 
             <Button text="Cadastrar" onClick={() => {
                 confirmPassword === password
-                ? sendRequest (name, email, password, setBoolean, history)
+                ? sendRequest ({name, email, password, setBoolean, history})
                 : alert("Senha incompatível")
                 }} />
-            <p onClick={() => history.push("/login")}>Já tem uma conta? Entre agora!</p>
+            <p onClick={() => history.push("/")}>Já tem uma conta? Entre agora!</p>
         </Container>
     )
 }
 
-function sendRequest (name, email, password, setBoolean, history) {
+function sendRequest ({name, email, password, setBoolean, history}) {
+
     if(name && email && password) {
         setBoolean(true)
         const body = {name, email, password}
@@ -57,6 +58,13 @@ function sendRequest (name, email, password, setBoolean, history) {
             history.push("/")
             }
         )
+        promise.catch((e) => {
+            setBoolean(false)
+            const error = e?.response.status
+            if (error === 409) alert("Email já cadastrado")
+            if (error === 404) alert("Preencha os campos com informações válidas")
+            if (error === 500) alert("Erro no cadastro, tente novamente")
+        })
     }
     else {
         alert("Preencha todos os campos")

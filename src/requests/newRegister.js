@@ -16,6 +16,6 @@ export default function newRegister (props) {
         })
     }
     else {
-        console.log(value, description)
+        alert('Preencha todos os campos');
     }
 }

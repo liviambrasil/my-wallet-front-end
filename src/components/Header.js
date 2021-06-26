@@ -33,6 +33,7 @@ function signOut (user, history) {
 const Image = styled.img`
     width: 23px;   
     height: 24px;
+    cursor: pointer;
 `
 
 const Top = styled.div`

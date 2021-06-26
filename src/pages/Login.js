@@ -34,13 +34,13 @@ export default function Login () {
                     type="password"
                     onChange={(event) => setPassword(event.target.value)} 
                     disabled={boolean}/>
-            <Button text="Entrar" onClick={() => sendRequest (email, setEmail, password, setPassword, setUser, setBoolean, history)} />
+            <Button text="Entrar" onClick={() => sendRequest ({email, password, setBoolean, setUser, history})} />
             <p onClick={() => history.push("/sign-up")}>Primeira vez? Cadastre-se!</p>
         </Container>
     )
 }
 
-function sendRequest (email,setEmail, password, setPassword, setUser, setBoolean, history) {
+function sendRequest ({email, password, setUser, setBoolean, history}) {
     setBoolean(true)
     const body = {email, password}
 
@@ -51,12 +51,12 @@ function sendRequest (email,setEmail, password, setPassword, setUser, setBoolean
         history.push('/home')
         localStorage.setItem("user", JSON.stringify(response.data))
     })
-    promise.catch(error => {
-        if(error.message === "Request failed with status code 401")
-        alert("Falha no login. Tente novamente.")
-        setBoolean(false)
-        setEmail('')
-        setPassword('')})
+    promise.catch(e => {
+        const error = e.response.status
+            if (error === 401) alert("E-mail e/ou senha incorreto(s)")
+            if (error === 404) alert("Preencha os campos com informações válidas")
+            if (error === 500) alert("Erro no login, tente novamente")
+        })
 }
 
 const Container = styled.div`
