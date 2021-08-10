@@ -25,9 +25,9 @@ export default function Home () {
         <Container>
             <Header title = {`Olá, ${user.username}`} buttonExit = {true} />
             <Records>
-                {registries
+                {registries?.length
                     ? <List registries={registries} />
-                    : <h2>Não há registros de entrada ou saída</h2>
+                    : <Warning><h2>Não há registros de entrada ou saída</h2></Warning>
                 }
             </Records>
             <Buttons>
@@ -60,13 +60,24 @@ const Records = styled.div`
     margin: 13px;
     text-align: center;
     position: relative;
+`
 
+const Warning = styled.div`
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+    background: #fff;
+    color: #868686;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     h2{
         width: 60%;
         font-size: 20px;
         text-align: center;
     }
 `
+
 const Buttons = styled.div`
     width: 100%;
     display: flex;

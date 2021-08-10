@@ -48,8 +48,8 @@ function sendRequest ({email, password, setUser, setBoolean, history}) {
     promise.then(response => { //response.data = {username, token}
         setBoolean(false)
         setUser(response.data)
-        history.push('/home')
         localStorage.setItem("user", JSON.stringify(response.data))
+        history.push('/home')
     })
     promise.catch(e => {
         const error = e.response.status
