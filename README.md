@@ -29,16 +29,18 @@ The following tools and frameworks were used in the construction of the project:
 ## How to run
 
 1. Clone this repository
-2. Install dependencies
+2. Clone the back-end repository at https://github.com/liviambrasil/my-wallet-back-end
+3. Follow instructions to run back-end at https://github.com/liviambrasil/my-wallet-back-end
+5. Install dependencies
 ```bash
 npm i
 ```
-3. Run with
+6. Run with
 ```bash
 npm start
 ```
-4. You can optionally build the project running
+7. You can optionally build the project running
 ```bash
 npm run build
 ```
-5. Finally access http://localhost:3000 on your favorite browser (unless it is Internet Explorer. In this case, review your life decisions)
+8. Finally access http://localhost:3000 on your favorite browser (unless it is Internet Explorer. In this case, review your life decisions)
