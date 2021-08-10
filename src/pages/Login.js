@@ -53,8 +53,9 @@ function sendRequest ({email, password, setUser, setBoolean, history}) {
     })
     promise.catch(e => {
         const error = e.response.status
+
             if (error === 401) alert("E-mail e/ou senha incorreto(s)")
-            if (error === 404) alert("Preencha os campos com informações válidas")
+            if (error === 400) alert("Preencha os campos com informações válidas")
             if (error === 500) alert("Erro no login, tente novamente")
         })
 }

@@ -8,7 +8,7 @@ export default function newRegister (props) {
     if(value, description) {
         const body = {value:(value*100), description, type}
         setBoolean(true)
-        const promise = axios.post('http://localhost:4000/registries', body, config)
+        const promise = axios.post(`${process.env.REACT_APP_HOST}registries`, body, config)
         promise.then(() => {
             alert("sucesso no registro!")
             setBoolean(false)
