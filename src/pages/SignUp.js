@@ -51,7 +51,7 @@ function sendRequest ({name, email, password, setBoolean, history}) {
     if(name && email && password) {
         setBoolean(true)
         const body = {name, email, password}
-        const promise = axios.post('http://localhost:4000/signup', body)
+        const promise = axios.post(`${process.env.REACT_APP_HOST}signup`, body)
         promise.then(() => {
             setBoolean(false)
             alert('sucesso no cadastro!')

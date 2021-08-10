@@ -9,11 +9,11 @@ import { HiOutlineMinusCircle,HiOutlinePlusCircle } from "react-icons/hi";
 
 export default function Home () {
     const [registries, setRegistries] = useState()
-    const {user, setUser} = useContext(UserContext)
+    const {user} = useContext(UserContext)
 
     useEffect(() => {
         const config = {headers: {"Authorization": `Bearer ${user.token}`}}
-        const promise = axios.get('http://localhost:4000/registries', config)
+        const promise = axios.get(`${process.env.REACT_APP_HOST}registries`, config)
         promise.then(response => {
             setRegistries(response.data)})
     }

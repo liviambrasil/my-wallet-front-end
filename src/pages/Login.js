@@ -44,7 +44,7 @@ function sendRequest ({email, password, setUser, setBoolean, history}) {
     setBoolean(true)
     const body = {email, password}
 
-    const promise = axios.post('http://localhost:4000/login', body)
+    const promise = axios.post(`${process.env.REACT_APP_HOST}login`, body)
     promise.then(response => { //response.data = {username, token}
         setBoolean(false)
         setUser(response.data)

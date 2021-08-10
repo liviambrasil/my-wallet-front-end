@@ -23,7 +23,7 @@ export default function Header ({title, buttonExit}) {
 
 function signOut (user, history) {
     const config = {headers: {"Authorization": `Bearer ${user.token}`}}
-    const promise = axios.post('http://localhost:4000/signout', {}, config)
+    const promise = axios.post(`${process.env.REACT_APP_HOST}signout`, {}, config)
     promise.then(() => {
         localStorage.clear()
         history.push("/")
