@@ -38,6 +38,7 @@ export default function Registry () {
             </Inputs>
             <Button text={text} 
                     onClick={() => newRegister({value, description, setBoolean, history, type, user})} />
+            <Button text="Voltar para o início" onClick={() => history.push("/home")} />
         </>
     )
 }

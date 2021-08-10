@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { AiOutlineExport, AiOutlineLogout } from "react-icons/ai"
+import { AiOutlineExport } from "react-icons/ai"
 import axios from "axios"
 import { useContext } from "react"
 import UserContext from "../context/UserContext"
@@ -14,7 +14,7 @@ export default function Header ({title, buttonExit}) {
         <Top>
             <h1>{title}</h1>
             {buttonExit
-            ? <Image onClick={() => signOut(user, history)} src="/assets/logout.png" />
+            ? <AiOutlineExport onClick={() => signOut(user, history)} />
             : <> </>
             }
         </Top>
